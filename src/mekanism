@@ -1,6 +1,8 @@
 #!/usr/bin/env python
+
 import argparse
 import sys
+from inits import *
 
 supported_inits = ["openrc", "systemd"]
 parser = argparse.ArgumentParser(description="Mekanism's main argument parser")
