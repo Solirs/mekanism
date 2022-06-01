@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+
+
+def mk_main():
+    print("Starting mekanism")
+
+
+if __name__ == "__main__":
+    mk_main()
