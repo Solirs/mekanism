@@ -1,8 +1,25 @@
 #!/usr/bin/env python
+import argparse
+import sys
+
+supported_inits = ["openrc", "systemd"]
+parser = argparse.ArgumentParser(description="Mekanism's main argument parser")
+
+def parse_args():
+    parser.add_argument("init", type=str, help="The init system to gen for.")
+
+    return parser.parse_args()
 
 
 def mk_main():
     print("Starting mekanism")
+    args = parse_args()
+    if args.init.lower() in supported_inits:
+        print(args.init)
+        #Something 
+    else:
+        print("The init system specified is not supported or does not exist. QUITTING!")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
