@@ -18,7 +18,6 @@ def mk_main():
     args = parse_args()
     if args.init.lower() in supported_inits:
         print(args.init)
-        #Something 
     else:
         print("The init system specified is not supported or does not exist. QUITTING!")
         sys.exit(1)
