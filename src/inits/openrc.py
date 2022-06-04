@@ -1,9 +1,11 @@
 #!/usr/bin/env python
+from utils import color, pathutils
 
 class OpenRCgen():
-    def __init__(self):
-        self.scrpath = "/etc/init.d"
-        self.template = "placeholder"
+    def __init__(self, *args, **kwargs):
+        self.scrpath = "/etc/init.d/"
+        self.template = kwargs.get("custompath", pathutils.templatepath() + "/templates/openrc_initscript.txt")
 
     def OpenRCgen(self, scrpath: str) -> None:
-        print("Generating for OpenRC")
+        print(color.Colors().brgreen + "[+] Generating for OpenRC")
+        print(self.template)

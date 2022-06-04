@@ -3,6 +3,8 @@
 import argparse
 import sys
 from inits import *
+from utils import *
+from pathlib import *
 
 initdc = {
     "openrc": openrc.OpenRCgen().OpenRCgen,
@@ -13,15 +15,20 @@ parser = argparse.ArgumentParser(description="Mekanism's main argument parser")
 
 def parse_args():
     parser.add_argument("init", type=str, help="The init system to gen for.")
+    parser.add_argument("-exec", type=str, help="Path of the binary to generate a script for, may contain flags or arguments relative to it.")
 
     return parser.parse_args()
+
+
+
 
 
 def mk_main():
     print("Starting mekanism")
     args = parse_args()
     if args.init.lower() in initdc:
-        initdc[args.init.lower()]()
+
+        initdc[args.init.lower()](pathutils.binpath(args.exec))
     else:
         print("The init system specified is not supported or does not exist. QUITTING!")
         sys.exit(1)
