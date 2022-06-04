@@ -4,7 +4,11 @@ import argparse
 import sys
 from inits import *
 
-supported_inits = ["openrc", "systemd"]
+initdc = {
+    "openrc": openrc.OpenRCgen().OpenRCgen,
+    "systemd": systemd.SystemDgen().SystemDgen
+}
+
 parser = argparse.ArgumentParser(description="Mekanism's main argument parser")
 
 def parse_args():
@@ -16,8 +20,8 @@ def parse_args():
 def mk_main():
     print("Starting mekanism")
     args = parse_args()
-    if args.init.lower() in supported_inits:
-        print(args.init)
+    if args.init.lower() in initdc:
+        initdc[args.init.lower()]()
     else:
         print("The init system specified is not supported or does not exist. QUITTING!")
         sys.exit(1)
