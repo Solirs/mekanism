@@ -1,0 +1,14 @@
+#!/sbin/openrc-run
+  
+
+start() {
+    ebegin "Starting $MK_SVNAME"
+    start-stop-daemon --start --exec $MK_EXECCMD
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping $MK_SVNAME"
+    start-stop-daemon --stop --exec $MK_EXECCMD
+    eend $?
+}
