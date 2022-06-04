@@ -6,16 +6,16 @@ from inits import *
 from utils import *
 from pathlib import *
 
-initdc = {
-    "openrc": openrc.OpenRCgen().OpenRCgen,
-    "systemd": systemd.SystemDgen().SystemDgen
-}
+global args
+
+
 
 parser = argparse.ArgumentParser(description="Mekanism's main argument parser")
 
 def parse_args():
     parser.add_argument("init", type=str, help="The init system to gen for.")
     parser.add_argument("-exec", type=str, help="Path of the binary to generate a script for, may contain flags or arguments relative to it.")
+    parser.add_argument('-template', nargs='?', type=str, help="(Full) path of script template")
 
     return parser.parse_args()
 
@@ -26,6 +26,12 @@ def parse_args():
 def mk_main():
     print("Starting mekanism")
     args = parse_args()
+
+    initdc = {
+    "openrc": openrc.OpenRCgen(template=args.template).OpenRCgen,
+    "systemd": systemd.SystemDgen(template=args.template).SystemDgen
+    }
+    
     if args.init.lower() in initdc:
 
         initdc[args.init.lower()](pathutils.binpath(args.exec))
