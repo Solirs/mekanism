@@ -8,4 +8,11 @@ class OpenRCgen():
         if template: self.template = template #I would love to use kwargs here but they dont resort to default value if kwarg is none...
 
     def OpenRCgen(self, scrpath: str) -> None:
-        print(color.Colors().brgreen + "[+] Generating for OpenRC")
+        print(color.Colors().brgreen + "[+] Generating for OpenRC" + color.Colors().reset)
+        template_file = open(self.template, 'r')
+
+        template = template_file.read()
+        
+        #Now the fun begins.
+
+        
