@@ -4,14 +4,16 @@ from utils import logutils
 from pathlib import *
 
 
-def binpath(path:str):
+def binpath(path:str): #This just resolves the full path of the program to execute if its in the PATH var.
     #Is it a full path?
-    exists = os.path.exists(path)
+    prog = path.split()[0]
+    exists = os.path.exists(prog)
     if exists is True: return path; pass
 
     #Is it in the path variable?
-    if (which(path)):
-        return which(path)
+    if (which(prog)):
+        flags = "".join(path.split()[1:]) #Error if directly put in brackets
+        return f"{which(prog)}  {flags}"
     else:
         logutils.fatal (f"Path {path} does not exist and not in the PATH variable.")
 
