@@ -3,12 +3,12 @@
 
 start() {
     ebegin "Starting $MK_SVNAME"
-    start-stop-daemon --start --exec $MK_EXECCMD
+    start-stop-daemon --background --start --exec $MK_EXECCMD --make-pidfile --pidfile /tmp/$MK_SVNAME.pid -- $MK_FLAGS
     eend $?
 }
 
 stop() {
     ebegin "Stopping $MK_SVNAME"
-    start-stop-daemon --stop --exec $MK_EXECCMD
+    start-stop-daemon --stop --pidfile /tmp/$MK_SVNAME.pid --exec $MK_EXECCMD -- $MK_FLAGS
     eend $?
 }
