@@ -12,8 +12,8 @@ def binpath(path:str): #This just resolves the full path of the program to execu
 
     #Is it in the path variable?
     if (which(prog)):
-        flags = "".join(path.split()[1:]) #Error if directly put in brackets
-        return f"{which(prog)}  {flags}"
+        flags = ("".join(path.split()[1:])) #Error if directly put in brackets
+        return f"{which(prog).rstrip()} {flags}"
     else:
         logutils.fatal (f"Path {path} does not exist and not in the PATH variable.")
 
