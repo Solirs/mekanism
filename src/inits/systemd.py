@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from utils import color, pathutils
+from preprocessor import *
 
 class SystemDgen():
     def __init__(self, template=None, *args, **kwargs):
@@ -12,3 +13,4 @@ class SystemDgen():
         template_file = open(self.template, 'r')
 
         template = template_file.read()
+        
