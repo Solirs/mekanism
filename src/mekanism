@@ -2,12 +2,12 @@
 
 import argparse
 import sys
+import os
 from inits import *
 from utils import *
 from pathlib import *
 
-global args
-
+debug = False #Developer only, ignore.
 
 
 parser = argparse.ArgumentParser(description="Mekanism's main argument parser")
@@ -24,7 +24,13 @@ def parse_args():
 
 
 def mk_main():
-    print("Starting mekanism")
+    logutils.good("[+] Starting mekanism")
+    if os.getuid() and debug is not True:
+        logutils.fatal("Creating a service requires root permissions.")
+    else:
+        logutils.good("[+] User is root. Continuing.")
+
+
     args = parse_args()
 
     initdc = {

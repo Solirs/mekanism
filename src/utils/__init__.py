@@ -1,1 +1,1 @@
-__all__ = ["pathutils"]
+__all__ = ["pathutils", "logutils", "color"]
