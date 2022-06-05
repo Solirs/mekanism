@@ -7,7 +7,7 @@ from pathlib import *
 def binpath(path:str):
     #Is it a full path?
     exists = os.path.exists(path)
-    if exists is True: return exists; pass
+    if exists is True: return path; pass
 
     #Is it in the path variable?
     if (which(path)):
