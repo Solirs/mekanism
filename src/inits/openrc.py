@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from utils import color, pathutils, logutils
-import preprocessor
+from preprocessor import preprocessor
 import os
 import sys
 import stat
@@ -17,8 +17,10 @@ class OpenRCgen():
 
         template = template_file.read()
 
-        fin = preprocessor.preprocessor.proprocess_template(template, scrpath)
-        service_name = preprocessor.preprocessor.get_prog_name(scrpath)
+        
+
+        fin = preprocessor.proprocess_template(template, scrpath)
+        service_name = preprocessor.get_prog_name(scrpath)
         logutils.good(f"[+] Template filling done ! Creating script in {self.scrpath}{service_name}")
 
         if os.path.exists(f'{self.scrpath}{service_name}'):
