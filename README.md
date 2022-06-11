@@ -1,6 +1,8 @@
 # Mekanism
 
-Mekanism is a simple program that generates init scripts and services
+Mekanism is a simple program that generates init scripts and services.
+It's designed for compatibility across UNIX like systems and does not use any non built-in module according to the (python 3.10.5 module index)[https://docs.python.org/3/py-modindex.html]. Meaning that you don't even need to configure pip to use it.
+
 
 It currently supports:
 
