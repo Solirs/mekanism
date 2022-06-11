@@ -7,7 +7,7 @@ from inits import *
 from utils import *
 from pathlib import *
 
-debug = True #Developer only, ignore.
+debug = False #Developer only, ignore.
 
 
 parser = argparse.ArgumentParser(description="Mekanism's main argument parser")
