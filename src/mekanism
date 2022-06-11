@@ -18,10 +18,12 @@ def parse_args():
     subparsers = parser.add_subparsers(dest="command")
 
     systemd = subparsers.add_parser('systemd', help='Systemd specific arguments.')
+    systemd.add_argument("mode", choices=["root", "user"], type=str, help="Root or user service?")
+
     openrc= subparsers.add_parser('openrc', help='OpenRC specific arguments.')
 
     for name, subp in subparsers.choices.items():
-        subp.add_argument("-exec", type=str, help="Path of the binary to generate a script for, may contain flags or arguments relative to it.")
+        subp.add_argument("-exec", type=str, help="Path of the binary to generate a script for, may contain flags or arguments relative to it.", required=True)
         subp.add_argument('-template', nargs='?', type=str, help="(Full) path of script template")
 
 
