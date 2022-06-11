@@ -7,7 +7,7 @@ from inits import *
 from utils import *
 from pathlib import *
 
-debug = False #Developer only, ignore.
+debug = True #Developer only, ignore.
 
 
 parser = argparse.ArgumentParser(description="Mekanism's main argument parser")
@@ -18,13 +18,16 @@ def parse_args():
     subparsers = parser.add_subparsers(dest="command")
 
     systemd = subparsers.add_parser('systemd', help='Systemd specific arguments.')
-    systemd.add_argument("mode", choices=["root", "user"], type=str, help="Root or user service?")
+    systemd.add_argument("mode", choices=["root", "user"], default="user",nargs="?", type=str, help="Root or user service?")
 
     openrc= subparsers.add_parser('openrc', help='OpenRC specific arguments.')
+
 
     for name, subp in subparsers.choices.items():
         subp.add_argument("-exec", type=str, help="Path of the binary to generate a script for, may contain flags or arguments relative to it.", required=True)
         subp.add_argument('-template', nargs='?', type=str, help="(Full) path of script template")
+        subp.add_argument("--output", "-o", default=None, nargs="?", type=str, dest="output", help="Output file")
+
 
 
 
@@ -37,7 +40,6 @@ def parse_args():
 def mk_main():
     logutils.good("[+] Starting mekanism")
     args = parse_args()
-
 
     if os.getuid() and debug is None:
         logutils.fatal("Creating a service requires root permissions.")
@@ -52,7 +54,7 @@ def mk_main():
     
     if args.command.lower() in initdc:
 
-        initdc[args.command.lower()](pathutils.binpath(args.exec))
+        initdc[args.command.lower()](pathutils.binpath(args.exec), opath=args.output)
     else:
         print("The init system specified is not supported or does not exist. QUITTING!")
         sys.exit(1)
