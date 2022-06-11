@@ -13,9 +13,18 @@ debug = False #Developer only, ignore.
 parser = argparse.ArgumentParser(description="Mekanism's main argument parser")
 
 def parse_args():
-    parser.add_argument("init", type=str, help="The init system to gen for.")
-    parser.add_argument("-exec", type=str, help="Path of the binary to generate a script for, may contain flags or arguments relative to it.")
-    parser.add_argument('-template', nargs='?', type=str, help="(Full) path of script template")
+    #parser.add_argument("init", type=str, help="The init system to gen for.")
+
+    subparsers = parser.add_subparsers(dest="command")
+
+    systemd = subparsers.add_parser('systemd', help='Systemd specific arguments.')
+    openrc= subparsers.add_parser('openrc', help='OpenRC specific arguments.')
+
+    for name, subp in subparsers.choices.items():
+        subp.add_argument("-exec", type=str, help="Path of the binary to generate a script for, may contain flags or arguments relative to it.")
+        subp.add_argument('-template', nargs='?', type=str, help="(Full) path of script template")
+
+
 
     return parser.parse_args()
 
@@ -25,22 +34,23 @@ def parse_args():
 
 def mk_main():
     logutils.good("[+] Starting mekanism")
-    if os.getuid() and debug is not True:
+    args = parse_args()
+
+
+    if os.getuid() and debug is None:
         logutils.fatal("Creating a service requires root permissions.")
     else:
         logutils.good("[+] User is root. Continuing.")
 
-
-    args = parse_args()
 
     initdc = {
     "openrc": openrc.OpenRCgen(template=args.template).OpenRCgen,
     "systemd": systemd.SystemDgen(template=args.template).SystemDgen
     }
     
-    if args.init.lower() in initdc:
+    if args.command.lower() in initdc:
 
-        initdc[args.init.lower()](pathutils.binpath(args.exec))
+        initdc[args.command.lower()](pathutils.binpath(args.exec))
     else:
         print("The init system specified is not supported or does not exist. QUITTING!")
         sys.exit(1)
