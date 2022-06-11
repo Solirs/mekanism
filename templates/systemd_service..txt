@@ -1,0 +1,6 @@
+[Unit] 
+Description= $MK_SVNAME 
+
+[Service] 
+Type= simple 
+ExecStart= $MK_EXECCMD $MK_FLAGS

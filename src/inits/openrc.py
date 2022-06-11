@@ -48,10 +48,4 @@ class OpenRCgen():
         
 
 
-
-        
-
-        
-        #Now the fun begins.
-
         
