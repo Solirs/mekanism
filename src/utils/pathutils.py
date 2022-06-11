@@ -4,6 +4,11 @@ from utils import logutils
 from pathlib import *
 
 
+def get_prog_name(cmd: str):
+    if "/" in cmd.split()[0]:
+        return cmd.split()[0].split("/")[-1]
+
+
 def binpath(path:str): #This just resolves the full path of the program to execute if its in the PATH var.
     #Is it a full path?
     prog = path.split()[0]
