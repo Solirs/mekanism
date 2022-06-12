@@ -26,3 +26,13 @@ Systemd:
 
 
 
+## Defaults
+
+By default (-o flag not specified) openrc services are placed in /etc/init.d.
+
+For systemd, if root mode is chosen then scripts are placed in /etc/systemd/system/, if user is chosen scripts are placed in ~/.config/systemd/user/
+
+By default service files are named after their program's name.
+For example `mekanism openrc -exec "ls"` > /etc/init.d/ls 
+
+All the templates are in the templates directory and are named after their init system.
