@@ -41,7 +41,7 @@ def mk_main():
     logutils.good("[+] Starting mekanism")
     args = parse_args()
 
-    if os.getuid() and debug is None:
+    if os.geteuid() !=0 and debug == False:
         logutils.fatal("Creating a service requires root permissions.")
     else:
         logutils.good("[+] User is root. Continuing.")
@@ -49,7 +49,7 @@ def mk_main():
 
     initdc = {
     "openrc": openrc.OpenRCgen(template=args.template).OpenRCgen,
-    "systemd": systemd.SystemDgen(template=args.template).SystemDgen
+    "systemd": systemd.SystemDgen(template=args.template, mode=args.mode).SystemDgen
     }
     
     if args.command.lower() in initdc:
