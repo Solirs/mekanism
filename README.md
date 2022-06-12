@@ -18,4 +18,5 @@ I plan to add support to the following:
     FreeBSD,
     OpenBSD.
 
-Readme WIP
+
+[Usage guide](https://github.com/Solirs/mekanism/blob/master/USAGE.md)
