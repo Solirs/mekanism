@@ -19,4 +19,5 @@ I plan to add support to the following:
     OpenBSD.
 
 
-[Usage guide](https://github.com/Solirs/mekanism/blob/master/USAGE.md)
+
+To pick up mekanism go check the [Usage guide](https://github.com/Solirs/mekanism/blob/master/USAGE.md).
